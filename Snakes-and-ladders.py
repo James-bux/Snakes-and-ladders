@@ -2,8 +2,12 @@ import time
 import random
 import os
 
-players = input("How many people are playing the game?")
-
+AmPlayers = int(input("How many people are playing the game?"))
+players = []
+i = 0
+for x in range(1,AmPlayers):
+  i += 1
+  players += i
 y0 = [" 1"," 2"," 3"," 4"," 5"," 6"," 7"," 8"," 9","10"]
 y1 = ["11","12","13","14","15","16","17","18","19","20"]
 y2 = ["21","22","23","24","25","26","27","28","29","30"]
@@ -24,7 +28,7 @@ def printTable():
       printY += y
       printY += "  "
     print(printY)
-  
+
 def gen_lads_and_snak():
   numlads = random.randint(3,7)
   numsnakes = random.randint(3,7)
@@ -34,10 +38,14 @@ def gen_lads_and_snak():
     ladend = random.randint(ladstart, 100)
     ladders.write(str(ladstart)+","+str(ladend))
 
+def RTD():
+  diceRoll = random.randint(1,6)
+  return diceRoll
+
 def playerMove():
-  for i in range(1,players):
-    
-  
+  for i in range(1,AmPlayers):
+    RTD()  
+
 while True:
   
   os.system('clear')
