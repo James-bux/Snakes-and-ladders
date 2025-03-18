@@ -12,4 +12,7 @@ def printTable():
       printY += y
     print(printY)
 
-os.system('clear')
+while True:
+  
+  os.system('clear')
+  printTable()
