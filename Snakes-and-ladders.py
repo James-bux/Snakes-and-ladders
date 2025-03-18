@@ -13,7 +13,7 @@ y5 = ["51","52","53","54","55","56","57","58","59","60"]
 y6 = ["61","62","63","64","65","66","67","68","69","70"]
 y7 = ["71","72","73","74","75","76","77","78","79","80"]
 y8 = ["81","82","83","84","85","86","87","88","89","90"]
-y9 = ["91","92","93","94","95","96","97","98","99","Fi"]
+y9 = ["91","92","93","94","95","96","97","98","99","100"]
 
 ylist = [y0, y1]
 
@@ -26,9 +26,13 @@ def printTable():
     print(printY)
   
 def gen_lads_and_snak():
-  numlads = randint(3,7)
-  numsnakes = randint(3,7)
+  numlads = random.randint(3,7)
+  numsnakes = random.randint(3,7)
   for i in range(numlads):
+    ladders = open("ladders.txt", "w")
+    ladstart = random.randint(1,100)
+    ladend = random.randint(ladstart, 100)
+    ladders.write(str(ladstart)+","+str(ladend))
 
 def playerMove():
   for i in range(1,players):
