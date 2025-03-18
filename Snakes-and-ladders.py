@@ -1,4 +1,5 @@
 import time
+import random
 import os
 
 y0 = [" 1"," 2"," 3"," 4"," 5"," 6"," 7"," 8"," 9","10"]
@@ -10,9 +11,12 @@ def printTable():
     printY = ""
     for y in i:
       printY += y
-      printY += "  "
     print(printY)
-
+def gen_lads_and_snak():
+  numlads = randint(3,7)
+  numsnakes = randint(3,7)
+  for i in range(numlads):
+    
 while True:
   
   os.system('clear')
