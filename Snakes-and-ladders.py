@@ -10,6 +10,7 @@ def printTable():
     printY = ""
     for y in i:
       printY += y
+      printY += "  "
     print(printY)
 
 while True:
