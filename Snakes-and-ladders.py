@@ -2,13 +2,17 @@ import time
 import random
 import os
 
-
-AmPlayers = int(input("How many people are playing the game?"))
+AmPlayers = 0
+while AmPlayers < 1 or AmPlayers == str():
+  AmPlayers = input("How many people are playing the game?")
 players = []
+playerPos = ["","","","","","","",""]
 i = 0
-for x in range(1,AmPlayers):
+for x in range(1,int(AmPlayers)):
   i += 1
-  players += i
+  players.extend(str(i))
+  
+input("press enter to start")
 y0 = [" 1"," 2"," 3"," 4"," 5"," 6"," 7"," 8"," 9","10"]
 y1 = ["11","12","13","14","15","16","17","18","19","20"]
 y2 = ["21","22","23","24","25","26","27","28","29","30"]
@@ -20,13 +24,20 @@ y7 = ["71","72","73","74","75","76","77","78","79","80"]
 y8 = ["81","82","83","84","85","86","87","88","89","90"]
 y9 = ["91","92","93","94","95","96","97","98","99","100"]
 
-ylist = [y0, y1]
+ylist = [y0, y1, y2, y3, y4, y5, y6, y7, y8, y9]
+
+def checkForPlayerPOS(length, y):
+  for i in range(1,length):
+    if playerPos[i] == y:
+      return "Pl"
+    else:
+      return str(y)
 
 def printTable():
   for i in ylist:
     printY = ""
     for y in i:
-      printY += y
+      printY += checkForPlayerPOS(len(players), y)
       printY += "  "
     print(printY)
 
