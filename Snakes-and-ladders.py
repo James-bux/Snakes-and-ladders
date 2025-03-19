@@ -2,6 +2,7 @@ import time
 import random
 import os
 
+
 AmPlayers = int(input("How many people are playing the game?"))
 players = []
 i = 0
@@ -29,14 +30,38 @@ def printTable():
       printY += "  "
     print(printY)
 
-def gen_lads_and_snak():
+def gen_lads():
   numlads = random.randint(3,7)
-  numsnakes = random.randint(3,7)
   for i in range(numlads):
     ladders = open("ladders.txt", "w")
     ladstart = random.randint(1,100)
     ladend = random.randint(ladstart, 100)
-    ladders.write(str(ladstart)+","+str(ladend))
+    ladders.write(str(ladstart)+","+str(ladend)+"\n")
+  ladders.close()
+  return(numlads)
+def gen_snakes():
+  numsnakes = random.randint(3,7)
+  for i in range(numsnakes):
+    snakes = open("snakes.txt", "w")
+    snakestart = random.randint(1,100)
+    snakeend = random.randint(1, snakestart)
+    snakes.write(str(snakestart)+","+str(snakeend)+"\n")
+  snakes.close()
+  return(numsnakes)
+  
+  
+
+def checksnakes(playloc, numsnakes):
+  snakes = open("snakes.txt", "r")
+  for i in range(numsnakes):
+    snakeline = snakes.readlines(1)
+    snakepos = snakeline.split(,)
+    if playloc == snakepos[1]:
+      playloc = snakepos[2]
+      print("you slid down a snake to"+str(snakepos[2]))
+      break
+    return(playloc)
+    
 
 def RTD():
   diceRoll = random.randint(1,6)
