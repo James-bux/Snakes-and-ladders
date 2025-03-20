@@ -12,7 +12,9 @@ i = 0
 for x in range(1,int(AmPlayers)):
   i += 1
   players.extend(str(i))
-  
+
+
+
 input("press enter to start")
 y0 = ["01","02","03","04","05","06","07","08","09","10"]
 y1 = ["11","12","13","14","15","16","17","18","19","20"]
@@ -66,26 +68,38 @@ def gen_snakes():
 def checksnakes(playloc, numsnakes):
   snakes = open("snakes.txt", "r")
   for i in range(numsnakes):
-    snakeline = snakes.readlines(1)
+    snakeline = snakes.readlines(i)
     snakepos = snakeline.split(',')
     if playloc == snakepos[1]:
       playloc = snakepos[2]
       print("you slid down a snake to"+str(snakepos[2]))
       break
     return(playloc)
-    
+def checklads(playloc, numlads):
+  ladders = open("ladders.txt", "r")
+  for i in range(numsnakes):
+    ladline = ladders.readlines(i)
+    ladpos = ladline.split(',')
+    if playloc == ladpos[1]:
+      playloc = ladpos[2]
+      print("you climbed a ladder to"+str(snakepos[2]))
+      break
+    return(playloc)
 
 def RTD():
   diceRoll = random.randint(1,6)
   return diceRoll
 
-def playerMove():
+def playerMove(numsnakes, numlads):
   for i in range(0,AmPlayers):
-    playerPos[i] += RTD()  
-
+    playerPos[i] += RTD()
+    playerpos[i] = checksnakes(playerPos[i], numsnakes)
+    playerpos[i] = checklads(playerPos[i], numlads)
+numlads = gen_lads()
+numsnakes = gen_snakes()
 while True:
   printTable()
   print(playerPos)
   input("Move players")
-  playerMove()
+  playerMove(numsakes, numlads)
   os.system('clear')
