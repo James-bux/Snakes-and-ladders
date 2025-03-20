@@ -48,7 +48,7 @@ def printTable():
     print(printY)
 
 def gen_lads():
-  numsnakes = random.randint(7,15)
+  numlads = random.randint(7,15)
   ladbottoms = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   ladtops = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   for i in range(numsnakes):
@@ -101,13 +101,13 @@ def playerMove():
     input()
     os.system('clear')
 snakeinfo = gen_snakes()
-numsnakes = snakeinfo[1]
-snakeHeads = snakeinfo[2]
-snakeTails = snakeinfo[3]
+numsnakes = snakeinfo[0]
+snakeHeads = snakeinfo[1]
+snakeTails = snakeinfo[2]
 ladinfo = gen_lads()
-numlads = ladinfo[1]
-ladbottoms = ladinfo[2]
-ladtops = ladinfo[3]
+numlads = ladinfo[0]
+ladbottoms = ladinfo[1]
+ladtops = ladinfo[2]
 os.system('clear')
 while True:
   playerMove()
