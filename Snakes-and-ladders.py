@@ -48,22 +48,22 @@ def printTable():
     print(printY)
 
 def gen_lads():
-  numlads = random.randint(7,15)
-  ladders = open("ladders.txt", "w")
-  for i in range(numlads):
-    ladstart = random.randint(1,100)
-    ladend = random.randint(ladstart, 100)
-    ladders.write(str(ladstart)+","+str(ladend)+"\n")
-  ladders.close()
-  return(numlads)
-  
-numsnakes = random.randint(7,15)
-snakeHeads = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-snakeTails = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  numsnakes = random.randint(7,15)
+  ladbottoms = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  ladtops = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  for i in range(numsnakes):
+    ladbottoms[i] = random.randint(1,99)
+    ladtops[i] = random.randint(ladbottoms[i], 100)
+  return numlads, ladbottoms, ladtops
+
 def gen_snakes():
+  numsnakes = random.randint(7,15)
+  snakeHeads = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  snakeTails = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   for i in range(numsnakes):
     snakeHeads[i] = random.randint(11,99)
     snakeTails[i] = random.randint(1,snakeHeads[i])
+  return numsnakes, snakeHeads, snakeTails
 
 def checksnakes(player):
   print(snakeHeads)
@@ -75,13 +75,12 @@ def checksnakes(player):
 def checklads(playloc, numlads):
   ladders = open("ladders.txt", "r")
   for i in range(numsnakes):
-    ladline = str(ladders.readlines(i))
-    ladpos = ladline.split(',')
-    if playloc == ladpos[1]:
-      playloc = ladpos[2]
-      print("you climbed a ladder to"+str(ladpos[2]))
-      break
-    return(playloc)
+    print(ladbottoms)
+  for i in range(numlads):
+    if playerPos[player] == ladbottoms[i]:
+      print(str(player) + " has climbed a ladder")
+      return ladtops[i]
+  return(playerPos[player])
 
 def RTD():
   diceRoll = random.randint(1,6)
@@ -101,7 +100,14 @@ def playerMove():
     #playerPos[i] = checklads(playerPos[i])
     input()
     os.system('clear')
-gen_snakes()
+snakeinfo = gen_snakes()
+numsnakes = snakeinfo[1]
+snakeHeads = snakeinfo[2]
+snakeTails = snakeinfo[3]
+ladinfo = gen_lads()
+numlads = ladinfo[1]
+ladbottoms = ladinfo[2]
+ladtops = ladinfo[3]
 os.system('clear')
 while True:
   playerMove()
