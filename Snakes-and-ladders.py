@@ -36,15 +36,22 @@ def checkForPlayerPOS(y):
       return ("P" + str(i+1))
   return str(y)
 
-def printTable():
+def printTable(interpolate, player):
   for i in ylist:
-    printY = ""
+    if i == y9:
+      printY = ""
+    else:
+      printY = " "
     for y in i:
       ConcCurr = str(checkForPlayerPOS(int(y)))
-      printY += ConcCurr
-      if i == y0 and not 'P' in ConcCurr:
+      if i == y0 and not y == "10" and not 'P' in ConcCurr:
         printY += " "
-      printY += "  "
+      if interpolate == 1 and ('P' + str(player)) in ConcCurr:
+        printY += y
+        printY += 'P' + str(player+1)
+      else:
+        printY += ConcCurr
+        printY += "| "
     print(printY)
 
 def gen_lads():
@@ -66,7 +73,6 @@ def gen_snakes():
   return numsnakes, snakeHeads, snakeTails
 
 def checksnakes(player):
-  print(snakeHeads)
   for i in range(numsnakes):
     if playerPos[player] == snakeHeads[i]:
       print(str(player) + " has been eaten by a snake")
@@ -86,20 +92,28 @@ def RTD():
   diceRoll = random.randint(1,6)
   return diceRoll
 
+def moveIndvPlayer(player,distance):
+  for i in range(distance):
+    playerPos[player] += 1
+    os.system('clear')
+    printTable(0, player)
+    time.sleep(0.2)
+  return(playerPos[player])
+
 def playerMove():
   for i in range(0,AmPlayers):
-    printTable()
+    os.system('clear')
+    printTable(0,'e')
     print(playerPos)
     print("Player " + str(i+1) + " move:")
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
       return
-    playerPos[i] += playerMove
+    playerPos[i] = moveIndvPlayer(i,playerMove)
     playerPos[i] = checksnakes(i)
     #playerPos[i] = checklads(playerPos[i])
-    input()
-    os.system('clear')
+
 snakeinfo = gen_snakes()
 numsnakes = snakeinfo[0]
 snakeHeads = snakeinfo[1]
