@@ -82,7 +82,7 @@ def checklads(playloc, numlads):
     ladpos = ladline.split(',')
     if playloc == ladpos[1]:
       playloc = ladpos[2]
-      print("you climbed a ladder to"+str(snakepos[2]))
+      print("you climbed a ladder to"+str(ladpos[2]))
       break
     return(playloc)
 
@@ -101,11 +101,11 @@ def playerMove():
       return
     playerPos[i] += playerMove
     os.system('clear')
-    playerpos[i] = checksnakes(playerPos[i], numsnakes)
-    playerpos[i] = checklads(playerPos[i], numlads)
+    playerPos[i] = checksnakes(playerPos[i], numsnakes)
+    playerPos[i] = checklads(playerPos[i], numlads)
 
 numlads = gen_lads()
 numsnakes = gen_snakes()
 while True:
-  playerMove(numsakes, numlads)
+  playerMove(numsnakes, numlads)
   os.system('clear')
