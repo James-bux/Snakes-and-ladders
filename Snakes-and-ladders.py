@@ -90,16 +90,22 @@ def RTD():
   diceRoll = random.randint(1,6)
   return diceRoll
 
-def playerMove(numsnakes, numlads):
+def playerMove():
   for i in range(0,AmPlayers):
-    playerPos[i] += RTD()
+    printTable()
+    print(playerPos)
+    print("Player",i,"move:")
+    input()
+    playerMove = RTD()
+    if playerPos[i] + playerMove > 100:
+      return
+    playerPos[i] += playerMove
+    os.system('clear')
     playerpos[i] = checksnakes(playerPos[i], numsnakes)
     playerpos[i] = checklads(playerPos[i], numlads)
+
 numlads = gen_lads()
 numsnakes = gen_snakes()
 while True:
-  printTable()
-  print(playerPos)
-  input("Move players")
   playerMove(numsakes, numlads)
   os.system('clear')
