@@ -4,7 +4,7 @@ import os
 
 AmPlayers = 0
 while AmPlayers < 1 or AmPlayers == str():
-  AmPlayers = input("How many people are playing the game?")
+  AmPlayers = int(input("How many people are playing the game?"))
 players = []
 playerPos = ["","","","","","","",""]
 i = 0
@@ -37,7 +37,7 @@ def printTable():
   for i in ylist:
     printY = ""
     for y in i:
-      printY += checkForPlayerPOS(len(players), y)
+      printY += checkForPlayerPOS(len(players), int(y))
       printY += "  "
     print(printY)
 
@@ -66,7 +66,7 @@ def checksnakes(playloc, numsnakes):
   snakes = open("snakes.txt", "r")
   for i in range(numsnakes):
     snakeline = snakes.readlines(1)
-    snakepos = snakeline.split(,)
+    snakepos = snakeline.split(',')
     if playloc == snakepos[1]:
       playloc = snakepos[2]
       print("you slid down a snake to"+str(snakepos[2]))
@@ -80,9 +80,10 @@ def RTD():
 
 def playerMove():
   for i in range(1,AmPlayers):
-    RTD()  
+    playerPos[i] = RTD()  
 
 while True:
   
+  playerMove()
   os.system('clear')
   printTable()
