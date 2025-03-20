@@ -1,7 +1,6 @@
 import time
 import random
 import os
-import re
 
 AmPlayers = 0
 while AmPlayers < 1:
