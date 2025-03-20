@@ -1,6 +1,7 @@
 import time
 import random
 import os
+import re
 
 AmPlayers = 0
 while AmPlayers < 1:
@@ -27,7 +28,7 @@ y7 = ["71","72","73","74","75","76","77","78","79","80"]
 y8 = ["81","82","83","84","85","86","87","88","89","90"]
 y9 = ["91","92","93","94","95","96","97","98","99","100"]
 
-ylist = [y0, y1, y2, y3, y4, y5, y6, y7, y8, y9]
+ylist = [y9,y8,y7,y6,y5,y4,y3,y2,y1,y0]
 
 def checkForPlayerPOS(y):
   for i in range(0,AmPlayers):
@@ -47,38 +48,34 @@ def printTable():
     print(printY)
 
 def gen_lads():
-  numlads = random.randint(3,7)
+  numlads = random.randint(7,15)
+  ladders = open("ladders.txt", "w")
   for i in range(numlads):
-    ladders = open("ladders.txt", "w")
     ladstart = random.randint(1,100)
     ladend = random.randint(ladstart, 100)
     ladders.write(str(ladstart)+","+str(ladend)+"\n")
   ladders.close()
   return(numlads)
+  
+numsnakes = random.randint(7,15)
+snakeHeads = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+snakeTails = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 def gen_snakes():
-  numsnakes = random.randint(3,7)
   for i in range(numsnakes):
-    snakes = open("snakes.txt", "w")
-    snakestart = random.randint(1,100)
-    snakeend = random.randint(1, snakestart)
-    snakes.write(str(snakestart)+","+str(snakeend)+"\n")
-  snakes.close()
-  return(numsnakes)
+    snakeHeads[i] = random.randint(11,99)
+    snakeTails[i] = random.randint(1,snakeHeads[i])
 
-def checksnakes(playloc, numsnakes):
-  snakes = open("snakes.txt", "r")
+def checksnakes(player):
+  print(snakeHeads)
   for i in range(numsnakes):
-    snakeline = snakes.readlines(i)
-    snakepos = snakeline.split(',')
-    if playloc == snakepos[1]:
-      playloc = snakepos[2]
-      print("you slid down a snake to"+str(snakepos[2]))
-      break
-    return(playloc)
+    if playerPos[player] == snakeHeads[i]:
+      print(str(player) + " has been eaten by a snake")
+      return snakeTails[i]
+  return(playerPos[player])
 def checklads(playloc, numlads):
   ladders = open("ladders.txt", "r")
   for i in range(numsnakes):
-    ladline = ladders.readlines(i)
+    ladline = str(ladders.readlines(i))
     ladpos = ladline.split(',')
     if playloc == ladpos[1]:
       playloc = ladpos[2]
@@ -94,18 +91,17 @@ def playerMove():
   for i in range(0,AmPlayers):
     printTable()
     print(playerPos)
-    print("Player",i,"move:")
+    print("Player " + str(i+1) + " move:")
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
       return
     playerPos[i] += playerMove
+    playerPos[i] = checksnakes(i)
+    #playerPos[i] = checklads(playerPos[i])
+    input()
     os.system('clear')
-    playerPos[i] = checksnakes(playerPos[i], numsnakes)
-    playerPos[i] = checklads(playerPos[i], numlads)
-
-numlads = gen_lads()
-numsnakes = gen_snakes()
+gen_snakes()
+os.system('clear')
 while True:
-  playerMove(numsnakes, numlads)
-  os.system('clear')
+  playerMove()
