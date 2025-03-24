@@ -54,13 +54,23 @@ def printTable(interpolate, player):
         printY += "| "
     print(printY)
 
+def printList(DaList):
+  DaPrint = ""
+  for i in range(AmPlayers):
+    DaPrint += "P"
+    DaPrint += str(i + 1)
+    DaPrint += ":"
+    DaPrint += str(DaList[i])
+    DaPrint += "  "
+  return DaPrint
+
 def gen_lads():
   numlads = random.randint(7,15)
   ladbottoms = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   ladtops = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-  for i in range(numsnakes):
-    ladbottoms[i] = random.randint(1,99)
-    ladtops[i] = random.randint(ladbottoms[i], 100)
+  for i in range(numlads):
+    ladbottoms[i] = random.randint(1,89)
+    ladtops[i] = random.randint(ladbottoms[i]+1, 100)
   return numlads, ladbottoms, ladtops
 
 def gen_snakes():
@@ -75,16 +85,16 @@ def gen_snakes():
 def checksnakes(player):
   for i in range(numsnakes):
     if playerPos[player] == snakeHeads[i]:
-      print(str(player) + " has been eaten by a snake")
+      print(str(player + 1) + " has been eaten by a snake")
+      time.sleep(1)
       return snakeTails[i]
   return(playerPos[player])
-def checklads(playloc, numlads):
-  ladders = open("ladders.txt", "r")
-  for i in range(numsnakes):
-    print(ladbottoms)
+
+def checklads(player):
   for i in range(numlads):
     if playerPos[player] == ladbottoms[i]:
-      print(str(player) + " has climbed a ladder")
+      print(str(player + 1) + " has gone up a ladder")
+      time.sleep(1)
       return ladtops[i]
   return(playerPos[player])
 
@@ -104,15 +114,18 @@ def playerMove():
   for i in range(0,AmPlayers):
     os.system('clear')
     printTable(0,'e')
-    print(playerPos)
+    print(printList(playerPos))
     print("Player " + str(i+1) + " move:")
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
       return
+    if playerPos[i] + playerMove == 100:
+      return i
     playerPos[i] = moveIndvPlayer(i,playerMove)
     playerPos[i] = checksnakes(i)
-    #playerPos[i] = checklads(playerPos[i])
+    playerPos[i] = checklads(i)
+  return "no"
 
 snakeinfo = gen_snakes()
 numsnakes = snakeinfo[0]
@@ -124,4 +137,7 @@ ladbottoms = ladinfo[1]
 ladtops = ladinfo[2]
 os.system('clear')
 while True:
-  playerMove()
+  win = playerMove()
+  if win != "no":
+    print("Player " + win, " wins!")
+    break
