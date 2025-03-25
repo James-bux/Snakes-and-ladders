@@ -139,5 +139,5 @@ os.system('clear')
 while True: #main game loop
   win = playerMove()
   if win[0] == "yes":
-    print("Player " + str(win[1]), " wins!")
+    print("Player " + str(win[1]+1) + " wins!")
     break
