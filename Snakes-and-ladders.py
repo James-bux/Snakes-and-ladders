@@ -119,13 +119,13 @@ def playerMove(): #move the players
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
-      return "yes"
+      return "no","0"
     if playerPos[i] + playerMove == 100:
-      return i
+      return "yes",i
     playerPos[i] = moveIndvPlayer(i,playerMove)
     playerPos[i] = checksnakes(i)
     playerPos[i] = checklads(i)
-  return "no"
+  return "no","0"
 
 snakeinfo = gen_snakes()  #game setup
 numsnakes = snakeinfo[0]
@@ -138,6 +138,6 @@ ladtops = ladinfo[2]
 os.system('clear')
 while True: #main game loop
   win = playerMove()
-  if win != "no":
-    print("Player " + win, " wins!")
+  if win[0] == "yes":
+    print("Player " + str(win[1]), " wins!")
     break
