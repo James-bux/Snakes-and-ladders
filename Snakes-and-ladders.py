@@ -119,6 +119,7 @@ def playerMove(): #move the players
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
+      print("Player " + str(i+1) + " has rolled over 100")
       continue
     if playerPos[i] + playerMove == 100:
       return "yes",i
