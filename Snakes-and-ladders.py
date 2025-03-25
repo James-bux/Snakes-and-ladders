@@ -119,7 +119,7 @@ def playerMove(): #move the players
     input()
     playerMove = RTD()
     if playerPos[i] + playerMove > 100:
-      return "no","0"
+      continue
     if playerPos[i] + playerMove == 100:
       return "yes",i
     playerPos[i] = moveIndvPlayer(i,playerMove)
