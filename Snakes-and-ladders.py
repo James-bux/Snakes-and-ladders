@@ -82,7 +82,7 @@ def gen_snakes(): #i dont need to explain this either
     snakeTails[i] = random.randint(1,snakeHeads[i]) # generate the tail of the snake from layer0-the snake head
   return numsnakes, snakeHeads, snakeTails #same as the ladders
 
-def checksnakes(player):
+def checksnakes(player): #checks if the player is on a snake
   for i in range(numsnakes):
     if playerPos[player] == snakeHeads[i]:
       print(str(player + 1) + " has been eaten by a snake")
@@ -90,7 +90,7 @@ def checksnakes(player):
       return snakeTails[i]
   return(playerPos[player])
 
-def checklads(player):
+def checklads(player): #checks if the player is on a ladder 
   for i in range(numlads):
     if playerPos[player] == ladbottoms[i]:
       print(str(player + 1) + " has gone up a ladder")
@@ -98,11 +98,11 @@ def checklads(player):
       return ladtops[i]
   return(playerPos[player])
 
-def RTD():
+def RTD(): #roll the dice
   diceRoll = random.randint(1,6)
   return diceRoll
 
-def moveIndvPlayer(player,distance):
+def moveIndvPlayer(player,distance): #move an individual player a given distance
   for i in range(distance):
     playerPos[player] += 1
     os.system('clear')
@@ -110,7 +110,7 @@ def moveIndvPlayer(player,distance):
     time.sleep(0.2)
   return(playerPos[player])
 
-def playerMove():
+def playerMove(): #move the players
   for i in range(0,AmPlayers):
     os.system('clear')
     printTable(0,'e')
@@ -127,7 +127,7 @@ def playerMove():
     playerPos[i] = checklads(i)
   return "no"
 
-snakeinfo = gen_snakes()
+snakeinfo = gen_snakes()  #game setup
 numsnakes = snakeinfo[0]
 snakeHeads = snakeinfo[1]
 snakeTails = snakeinfo[2]
@@ -136,7 +136,7 @@ numlads = ladinfo[0]
 ladbottoms = ladinfo[1]
 ladtops = ladinfo[2]
 os.system('clear')
-while True:
+while True: #main game loop
   win = playerMove()
   if win != "no":
     print("Player " + win, " wins!")
